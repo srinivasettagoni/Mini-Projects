@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pomodoro Timer</title>
+  <style>
+    #timer {
+      text-align: center;
+      font-size: 90px;
+      margin-top: 200px;
+      color: antiquewhite;
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+    #start-stop {
+      width: 100px;
+      height: 50px;
+      font-size: 30px;
+      background-color: rgb(210, 220, 19);
+      margin-left: 700px;
+    }
+    body{
+        background-color: blueviolet;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">15:00</div>
+  <button id="start-stop">Start</button>
+  <script>
+    var timer = document.getElementById("timer");
+    var startStop = document.getElementById("start-stop");
+    var minutes = 15;
+    var seconds = 0;
+    var intervalId;
+    var isRunning = false;
+
+    startStop.addEventListener("click", function() {
+      if (!isRunning) {
+        intervalId = setInterval(countdown, 1000);
+        isRunning = true;
+        startStop.innerHTML = "Stop";
+      } else {
+        clearInterval(intervalId);
+        isRunning = false;
+        startStop.innerHTML = "Start";
+      }
+    });
+
+    function countdown() {
+      if (seconds === 0) {
+        if (minutes === 0) {
+          alert("Time up!");
+          clearInterval(intervalId);
+          isRunning = false;
+          startStop.innerHTML = "Start";
+        } else {
+          minutes--;
+          seconds = 59;
+        }
+      } else {
+        seconds--;
+      }
+
+      if(seconds<10) {
+         timer.innerHTML = minutes + ":0" + seconds;
+      }else{
+         timer.innerHTML = minutes + ":" + seconds;
+      }
+    }
+  </script>
+</body>
+</html>
